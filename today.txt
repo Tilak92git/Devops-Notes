@@ -1,0 +1,64 @@
+1  sudo apt update && sudo apt upgrade -y
+    2  ls
+    3  source mash/bin/activate
+    4  cd sample1/
+    5  ls
+    6  cd django_web_app/
+    7  ls
+    8  sudo service nginx status
+    9  pip install gunicorn
+   10  sudo apt install supervisor
+   11  which gunicorn
+   12  pwd
+   13  cd django_web_app/
+   14  ls
+   15  pwd
+   16  cd /etc/supervisor/conf.d
+   17  ls
+   18  sudo nano gunicorn.conf
+   19  sudo supervisorctl reread
+   20  sudo supervisorctl update
+   21  sudo supervisorctl status
+keep
+Pinned
+22  cd
+   23  ls
+   24  cs sample1/
+   25  cd sample1/
+   26  ls
+   27  cd django_web_app/
+   28  ls
+   29  which python
+   30  sudo /home/ubuntu/mash/bin/python manage.py runserver 0.0.0.0:80
+   31  cd /etc/nginx/sites-avaiable
+   32  cd /etc/nginx/sites-available
+   33  ls
+   34  sudo nano default 
+   35  sudo service nginx restart
+   36  sudo service nginx status
+   37  ls
+   38  cd
+   39  ls
+   40  cd sample1/
+   41  ls
+   42  cd django_web_app/
+   43  ls
+   44  sudo /home/ubuntu/mash/bin/py
+keep
+Pinned
+Amudala Sagar
+12:40
+44  sudo /home/ubuntu/mash/bin/python manage.py runserver 0.0.0.0:80
+   45  which gunicorn
+   46  sudo /home/ubuntu/mash/bin/gunicorn --bind 0.0.0.0:80 django_web_app.wsgi:application
+keep
+Pinned
+[program:gunicorn]
+directory=/home/ubuntu/sample1/django_web_app
+command=/home/ubuntu/mash/bin/gunicorn --workers 3 --bind 80 unix:/home/ubuntu/sample1/django_web_app/django_web_app django_web_app.wsgi.application
+autostart=true
+autorestart=true
+
+[group:guni]
+keep
+Pinned

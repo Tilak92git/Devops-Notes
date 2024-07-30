@@ -1,0 +1,86 @@
+Ansible Commands
+
+Create 3 instances: Controller, node1, node2 and then connect node1 and node2 to controller
+
+<role rolename="manager-gui"/> 
+<user username="admin" password="admin" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
+For controller commands:
+    1  sudo apt update
+    2  sudo apt upgrade
+    3  sudo apt install ansible
+    4  ansible --version
+    5  ssh-keygen -t rsa -b 2048
+    6  cat /home/ubuntu/.ssh/id_rsa.pub
+    7  ssh ubuntu@16.16.187.178    
+    8  ssh ubuntu@13.49.226.147    
+    9  vim inventory
+   10  ansible -i inventory controllers -m ping
+
+For node1 and node2 commands:
+    1  sudo apt update
+    2  sudo apt upgrade
+    3  sudo vi .ssh/authorized_keys
+
+In 'vim inventory' should give,
+[controllers]
+node1 ansible_host= public IP address
+node2 ansible_host= public IP address
+
+12  vim hosts.ini
+-------------
+node1 ansible_host=172.31.46.139  (private ip)
+node2 ansible_host=172.31.41.186  (private ip)
+
+
+13  vim installnginx.yml
+    ---------------
+
+---
+- name: install nginx
+  hosts: all
+  become: 'yes'
+  tasks:
+    - name: install nginx
+      apt:
+         name: nginx
+         state: latest
+    - name: start nginx
+      service:
+         name: nginx
+         state: started
+         enabled: 'yes'
+
+14  ansible-playbook -i hosts.ini installnginx.yml
+
+15 vim uninstallnginx.yml
+--------------------
+
+---
+- name: Remove Nginx from hosts
+  hosts: all
+  become: yes
+  tasks:
+    - name: Stop Nginx Service
+      service:
+        name: nginx
+        state: stopped
+
+    - name: Remove Nginx
+      apt:
+        name: nginx
+        state: absent
+
+16  ansible-playbook -i hosts.ini uninstallnginx.yml
+
+17  vim hosts.yml
+
+all:
+  children:
+    webservers:
+      hosts:
+        node1:
+          ansible_host: 172.31.46.139 (private ip of node1)
+        node2:
+          ansible_host: 172.31.41.186 (private ip of node2)
+
+18 ansible-playbook -i hosts.yml installnginx.yml

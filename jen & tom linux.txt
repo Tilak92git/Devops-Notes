@@ -1,0 +1,48 @@
+  Tomcat installation with linux
+
+ <role rolename="manager-gui"/>
+ <user username="admin" password="admin" roles="manager-gui, manager-script, manager-status"/>
+
+ sudo -i (or) sudo su - (to change from ec2 user to root user)
+ yum install java-11
+ java --version
+ wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.91/bin/apache-tomcat-9.0.91.tar.gz
+ ls
+ tar -xvf apache-tomcat-9.0.91.tar.gz
+ ls
+ cd apache-tomcat-9.0.91
+ ls
+ cd webapps
+ ls
+ cd manager
+ ls
+ cd META-INF
+ ls
+ nano context.xml
+ cd ../../..
+ ls
+ cd conf
+ ls
+ nano tomcat-users.xml
+ cd ..
+ ls
+ cd bin
+ ls
+ ./startup.sh
+______________________________________________________________________________________________________________________________________________________________________________________________________________________
+  Jenkins with linux
+
+ sudo su - (or) sudo -i (to change from ec2 user to root user)
+ sudo yum upadte
+ sudo yum upgrade
+ sudo yum install git maven -y
+ git --version
+ mvn --version
+ sudo yum install java-11
+ sudo yum remove java* (to remove java versions if not installed correct version)
+ open jenkins.io and click on install jenkins and then click on linux and choose red hat then copy and paste the url in jenkins instance
+ sudo systemctl start jenkins
+ sudo systemctl status jenkins
+ cat (copy and paste here the path from jenkins to reveal the password)
+ copy the password and paste it in jenkins portal 
+

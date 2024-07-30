@@ -1,0 +1,17 @@
+   Nexus commands
+    1 wget https://builds.openlogic.com/downloadJDK/openlogic-openjdk/8u412-b08/openlogic-openjdk-8u412-b08-linux-x64-el.rpm
+    2  ls
+    3  sudo yum install openlogic-openjdk-8u412-b08-linux-x64-el.rpm
+    4  sudo yum install openlogic-openjdk-8u412-b08-linux-x64-el.rpm
+    5  java -version
+     6  wget https://download.sonatype.com/nexus/3/nexus-3.69.0-02-java8-unix.tar.gz
+    7  tar -xvf nexus-3.69.0-02-java8-unix.tar.gz
+    8  ls
+    9  adduser nexus
+   10  chown -R nexus:nexus nexus-3.69.0-02
+   11  chmod -R 775 nexus-3.69.0-02 sonatype-work/
+   12  cd nexus-3.69.0-02/
+   13  cd bin/
+   14  ls
+   15  ./nexus start
+   16 cat /root/sonatype-work/nexus3/admin.password

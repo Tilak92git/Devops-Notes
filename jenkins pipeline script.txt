@@ -1,0 +1,23 @@
+jenkins pipeline using script
+
+pipeline {
+    agent any
+
+    stages {
+        stage('checkout from github') {
+            steps {
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/Tilak92git/onlinebookstore.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('deploy') {
+            steps {
+                deploy adapters: [tomcat9(credentialsId: '1cab6914-b8ee-4b0c-9bbf-efb75121d621', path: '', url: 'http://3.88.164.173:8080/')], contextPath: 'Tilak book store', war: '**/*.war'
+            }
+        }
+    }
+}

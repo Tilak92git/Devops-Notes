@@ -1,0 +1,23 @@
+CREATING PIPELINE USING WEBHOOK 
+
+pipeline {
+    agent any
+
+    stages {
+        stage('clone') {
+            steps {
+               git branch: 'main', url: 'https://github.com/Tilak92git/onlinebookstore.git' (note: url must be changed(give new url))
+            }
+        }
+        stage('build') {
+            steps {
+               sh 'mvn clean package' 
+            }
+        }
+         stage('deploy') {
+            steps {
+               deploy adapters: [tomcat9(credentialsId: 'e5e2520d-8e0a-405c-b828-f4e2d0529da2', path: '', url: 'http://20.193.142.143:8080')], contextPath: 'new2', war: '**/*.war' 
+            }                                                                                              (**note: in aws the ip address changes everytime so give new ip address whenever made changes but in Azure the ip address stays the same)              
+        }                                                                                                   (*note: the context path also changes so always give new context path when cteating new pipeline)        
+    }
+}
